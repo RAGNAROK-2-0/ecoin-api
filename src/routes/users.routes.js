@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createUser,list } from "../modules/accounts/repository/UsersRepository"
+import { CreateUser } from "../modules/accounts/repository/UsersRepository"
 
 const usersRoutes = Router();
 
-usersRoutes.post("/create", createUser);
-usersRoutes.get("/", list);
+usersRoutes.post("/create", CreateUser);
+// usersRoutes.post("/", list);
 
 export {usersRoutes}

@@ -5,7 +5,7 @@ async function CreateUser(req, res, next) {
     const users = {  email, dt_nascimento, nome, senha, cpf  }
 
     try {
-      console.log(await Users.create(users))
+        await Users.create(users)
         // console.log(users)
         res.status(201).json({ message: "Cliente criado com sucesso!" })
     } catch (error) {
@@ -14,15 +14,5 @@ async function CreateUser(req, res, next) {
 }
 
 
-async function List(req, res, next) {
-    try {
-        const list = await Users.find();
-        res.status(200).json(list);
-    } catch (error) {
-        res.status(500).json({error: error})
-    }
-}
 
-
-
-export { CreateUser,List }
+export { CreateUser }
