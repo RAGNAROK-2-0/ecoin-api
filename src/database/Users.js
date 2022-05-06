@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
 const Users = mongoose.model('Users', {
-    usuario: String,
-    senha: String,
+    nome: String,
+    dt_nascimento: Date,
     email: String,
-    admin: Boolean,
+    cpf: Number,
+    senha: String,
 })
 
 export { Users };

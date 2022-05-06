@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-
-mongoose.connect('mongodb+srv://tofanini:cesar12345@cluster0.ytgt8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGODB_LINK)
 .then(()=>{
     console.log("Conectado ao MongoDB")
 })
