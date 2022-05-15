@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken'
 function generateJWT(payload)
 {
     const secret = process.env.SECRET;
-    console.log(secret)
     const token = jwt.sign(payload,secret,{expiresIn: "1d"})
     return token
 }

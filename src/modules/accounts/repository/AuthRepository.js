@@ -2,32 +2,22 @@ import { generateJWT } from '../../jwt/repository/JwtRepository';
 import { findUserByEmail } from './UsersRepository'
 
 async function Auth(req, res, next) {
-    const { email, senha } = req.body
+    let { email, senha } = req.body
 
-
+      
     try {
-        const userInfo =  await findUserByEmail(email);
-        console.log(userInfo)
+        const userInfo = await findUserByEmail(email);
 
-
-
-        if (userInfo[0].senha.trim() != senha.trim())
+        if (userInfo.senha != senha)
             throw new Error('Usuario ou senha incorreta!');
 
-        if (userInfo[0].email.trim() != email.trim())
+        if (userInfo.email != email)
             throw new Error('Usuario ou senha incorreta!');
 
-        const {
-            nomeToJwt,
-            emailToJwt
-        } = userInfo;
-
-        const payload = { nomeToJwt, emailToJwt }
+        const nomeMongoDb = userInfo.nome;
+        const payload = { nomeMongoDb, email }
 
         const jwt = generateJWT(payload);
-
-
-
 
         res.status(200).json({ jwt, message: "Operação realizada com sucesso!" });
     } catch (error) {
@@ -37,4 +27,4 @@ async function Auth(req, res, next) {
 }
 
 
-export {Auth}
+export { Auth }

@@ -48,8 +48,7 @@ async function findUserByCpf(cpf) {
 }
 
 async function findUserByEmail(email) {
-    const user = await Users.find({ email: email });
-
+    const user = await Users.findOne({ email: email }).exec();
     return user;
 }
 
