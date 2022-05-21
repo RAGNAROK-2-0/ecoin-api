@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CreateUser,ListAllUsers } from "../modules/accounts/repository/UsersRepository"
+import { CreateUser,ListAllUsers } from "../modules/accounts/UsersRepository"
 
 const usersRoutes = Router();
 

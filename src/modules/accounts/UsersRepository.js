@@ -1,9 +1,9 @@
 import { Users } from '../../../database/Users'
 import { TestaCPF } from '../../validators/testCpf'
 
-async function CreateUser(req, res, next) {
+async function CreateUser(req, res) {
     const { email, dt_nascimento, nome, senha, cpf } = req.body
-    const users = { email, dt_nascimento, nome, senha, cpf }
+    const user = { email, dt_nascimento, nome, senha, cpf }
 
     try {
         if (!email || !senha) {
@@ -21,7 +21,7 @@ async function CreateUser(req, res, next) {
             throw new Error('Usuario já existe!');
         }
 
-        await Users.create(users);
+        await Users.create(user);
 
         res.status(201).json({ message: "Cliente criado com sucesso!" })
     } catch (error) {

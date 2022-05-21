@@ -21,6 +21,7 @@ async function Auth(req, res, next) {
 
         res.status(200).json({ jwt, message: "Operação realizada com sucesso!" });
     } catch (error) {
+        
         const errorMessage = error.toString()
         res.status(400).json(errorMessage)
     }

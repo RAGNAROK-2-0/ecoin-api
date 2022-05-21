@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { Auth } from "../modules/accounts/repository/AuthRepository"
+import { Auth } from "../modules/accounts/AuthRepository"
+import { verifyJWT } from "../modules/jwt/JwtRepository";
 
 const authRoutes = Router();
 
-authRoutes.post("/", Auth);
+authRoutes.post("/",verifyJWT, Auth);
 
 export { authRoutes }
