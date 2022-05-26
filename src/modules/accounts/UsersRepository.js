@@ -1,5 +1,5 @@
-import { Users } from '../../../database/Users'
-import { TestaCPF } from '../../validators/testCpf'
+import { Users } from '../../database/Users'
+import { TestaCPF } from '../validators/testCpf'
 
 async function CreateUser(req, res) {
     const { email, dt_nascimento, nome, senha, cpf } = req.body
@@ -17,7 +17,7 @@ async function CreateUser(req, res) {
 
         let UserExists = await findUserByCpf(cpf);
 
-        if (UserExists.length > 0) {
+        if (UserExists) {
             throw new Error('Usuario já existe!');
         }
 
@@ -28,6 +28,29 @@ async function CreateUser(req, res) {
         const errorMessage = error.toString()
         res.status(400).json(errorMessage)
     }
+}
+
+async function UpdateUser(req, res) {
+    const { email, dt_nascimento, nome, senha, cpf } = req.body
+    const user = { email, dt_nascimento, nome, senha, cpf }
+    try {
+
+        let UserExists = await findUserByCpf(cpf);
+
+        if (!UserExists) {
+            throw new Error('Operação cancelada, usuario inesistente!')
+        }
+
+        UserExists.overwrite(user)
+        await UserExists.save();
+
+        res.status(201).json({ message: "Cliente Atualizado com sucesso!" })
+
+    } catch (error) {
+        const errorMessage = error.toString()
+        res.status(400).json(errorMessage)
+    }
+
 }
 
 async function ListAllUsers(req, res, next) {
@@ -42,7 +65,7 @@ async function ListAllUsers(req, res, next) {
 
 
 async function findUserByCpf(cpf) {
-    const user = await Users.find({ cpf: cpf });
+    const user = await Users.findOne({ cpf: cpf });
 
     return user;
 }
@@ -54,4 +77,4 @@ async function findUserByEmail(email) {
 
 
 
-export { CreateUser, ListAllUsers, findUserByEmail, findUserByCpf }
+export { CreateUser, ListAllUsers, findUserByEmail, findUserByCpf, UpdateUser }

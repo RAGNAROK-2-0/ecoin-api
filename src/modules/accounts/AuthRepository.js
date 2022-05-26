@@ -1,4 +1,4 @@
-import { generateJWT } from '../../jwt/repository/JwtRepository';
+import { generateJWT } from '../jwt/JwtRepository';
 import { findUserByEmail } from './UsersRepository'
 
 async function Auth(req, res, next) {

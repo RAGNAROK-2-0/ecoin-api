@@ -4,6 +4,6 @@ import { verifyJWT } from "../modules/jwt/JwtRepository";
 
 const authRoutes = Router();
 
-authRoutes.post("/",verifyJWT, Auth);
+authRoutes.post("/", Auth);
 
 export { authRoutes }
