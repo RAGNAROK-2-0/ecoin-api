@@ -15,4 +15,4 @@ app.use(
 // app.use(router);
 
 
-app.listen(3133,() => console.log("server is running!🚀"));
+app.listen(process.env.PORT || 5000,() => console.log("server is running!🚀"));
