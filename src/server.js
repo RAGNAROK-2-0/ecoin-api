@@ -12,7 +12,7 @@ app.use(
     express.json()
     )
     
-app.use(router);
+// app.use(router);
 
 
 app.listen(3133,() => console.log("server is running!🚀"));
