@@ -1,11 +1,15 @@
 {
   "name": "apirest",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.17.3",
+    "yarn": "1.21.1"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/server.js",
-    "start": "nodemon ./src/server.js localhost 3100"
+    "start": "nodemon --exec babel-node ./src/server.js"
   },
   "keywords": [],
   "author": "",
