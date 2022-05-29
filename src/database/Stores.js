@@ -5,7 +5,7 @@ const Stores = mongoose.model('Stores', {
     nomeLoja: String,
     descricaoLoja: String,
     imgLoja: String,
-    favoritedBy: String,
+    favoritedBy: Array,
 })
 
 export { Stores };
