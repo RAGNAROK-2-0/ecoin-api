@@ -4,7 +4,7 @@ import { findUserByEmail } from './UsersRepository'
 async function Auth(req, res, next) {
     let { email, senha } = req.body
 
-      
+
     try {
         const userInfo = await findUserByEmail(email);
 
@@ -15,13 +15,14 @@ async function Auth(req, res, next) {
             throw new Error('Usuario ou senha incorreta!');
 
         const nomeMongoDb = userInfo.nome;
-        const payload = { nomeMongoDb, email }
+        const cpf = userInfo.cpf;
+        const payload = { nome: nomeMongoDb, email, cpf: cpf }
 
         const jwt = generateJWT(payload);
 
         res.status(200).json({ jwt, message: "Operação realizada com sucesso!" });
     } catch (error) {
-        
+
         const errorMessage = error.toString()
         res.status(400).json(errorMessage)
     }
