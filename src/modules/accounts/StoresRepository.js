@@ -1,6 +1,6 @@
 import { Stores } from '../../database/Stores'
 
-async function ListAllStores(req, res) {
+async function ListAllStores(req, res, next) {
 
     try {
         const list = await Stores.find();
