@@ -43,7 +43,7 @@ async function FavoriteStore(req, res) {
 }
 
 async function findStoreByID(idLoja) {
-    const store = await store.findOne({ idLoja: idLoja });
+    const store = await Stores.findOne({ idLoja: idLoja });
 
     return store;
 }
