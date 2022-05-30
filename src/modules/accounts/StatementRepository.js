@@ -3,7 +3,7 @@ import { Statement } from '../../database/Statement'
 import { TestaCPF } from '../validators/testCpf'
 
 async function ListTransactions(req, res) {
-    let { cpf } = req.body
+    let { cpf } = req.params
 
     try {
         const userInfo = await findUserByCpf(cpf);

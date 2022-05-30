@@ -4,7 +4,7 @@ import { ListTransactions,DepositTransaction,WithDrawTransaction } from "../modu
 
 const statementRouter = Router();
 
-statementRouter.get("/", ListTransactions);
+statementRouter.get("/:cpf", ListTransactions);
 statementRouter.post("/deposit", DepositTransaction);
 statementRouter.post("/withdraw", WithDrawTransaction);
 
