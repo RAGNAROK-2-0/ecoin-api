@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ListAllStores,FavoriteStore } from "../modules/accounts/StoresRepository"
+import { ListAllStores, FavoriteStore } from "../modules/accounts/StoresRepository"
 
 const storesRoutes = Router();
 
