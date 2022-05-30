@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { ListAllStores, FavoriteStore } from "../modules/accounts/StoresRepository"
+import { ListAllStores, FavoriteStore,CreateStore } from "../modules/accounts/StoresRepository"
 
 const storesRoutes = Router();
 
-storesRoutes.put("/updateStore", FavoriteStore);
+storesRoutes.patch("/updateStore", FavoriteStore);
 storesRoutes.get("/", ListAllStores);
+storesRoutes.post("/create", CreateStore);
 
 export {storesRoutes}

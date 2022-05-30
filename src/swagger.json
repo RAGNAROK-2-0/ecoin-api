@@ -329,7 +329,7 @@
       }
     },
     "/stores/updateStore": {
-      "post": {
+      "patch": {
         "tags": ["Lojas"],
         "summary": "Favorita uma loja por cpf",
         "description": "Favorita uma loja por cpf",
@@ -340,9 +340,6 @@
                   "type": "object",
                   "properties": {
                     "idLoja": {
-                      "type": "string"
-                    },
-                    "cpf": {
                       "type": "string"
                     }
                   },
@@ -363,6 +360,54 @@
           }
         }
       }
-    }
+    },
+    "/stores/create": {
+        "post": {
+          "tags": ["Lojas"],
+          "summary": "Cria uma loja",
+          "description": "Cria uma loja para transferencia de milhas",
+          "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "idLoja": {
+                        "type": "number"
+                      },
+                      "nomeLoja": {
+                        "type": "string"
+                      },
+                      "descricaoLoja": {
+                        "type": "string"
+                      },
+                      "imgLoja": {
+                        "type": "string"
+                      },
+                      "favoritedBy": {
+                        "type": "array"
+                      }
+                    },
+                    "example": {
+                      "idLoja": "4",
+                      "nomeLoja":"sample",
+                      "descricaoLoja":"sample milhas e outras coisitas más",
+                      "imgLoja":"",
+                      "favoritedBy":[]
+                    }
+                  }
+                }
+              }
+            },
+          "responses": {
+            "200": {
+              "description": "Operacao realizada com sucesso!"
+            },
+            "400": {
+              "description": "Erro interno"
+            }
+          }
+        }
+      }
   }
 }
