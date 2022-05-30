@@ -10,7 +10,7 @@ const router = Router();
 router.use("/auth", authRoutes);
 router.use("/users", usersRoutes);
 router.use("/statement", statementRouter);
-router.use("/stores", storesRoutes);
+router.use("/Stores", storesRoutes);
 // router.use(autenticateRoutes);
 
 export { router };
