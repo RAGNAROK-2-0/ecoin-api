@@ -1,0 +1,364 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-coin API 🚀",
+    "description": "API responsavel pela manutenção e operações do dentro do e-coin app",
+    "version": "1.0.0",
+    "contact": {
+      "name": "E-coin",
+      "email": "suporte@ecoin.com"
+    }
+  },
+  "paths": {
+    "/auth": {
+      "post": {
+        "tags": ["Autenticação de Usuário"],
+        "summary": "Autenticar Usuário",
+        "description": "Verica se as credenciais informadas estão condigentes com a registrada na base de dados",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email:": "sample@saplemail.com",
+                  "senha": "minhaSenhaSuperSeguraESecreta"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuario autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jwt": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Senha não fornecida"
+          },
+          "400": {
+            "description": "Senha ou Email invalido"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Usuario"],
+        "summary": "Lista todos os Usuarios registrados",
+        "description": "Lista todos os Usuarios registrados",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios"
+          }
+        }
+      }
+    },
+    "/users/create": {
+      "post": {
+        "tags": ["Usuario"],
+        "summary": "Criar um novo usuario",
+        "description": "Criar um novo usuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "dt_nascimento": {
+                    "type": "Date"
+                  },
+                  "nome": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  },
+                  "cpf": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "email": "sample2@saplemail.com",
+                  "nome": "Jão da silva",
+                  "dt_nascimento": "1653908400",
+                  "senha": "minhaSenhaSuperSeguraESecreta",
+                  "cpf": "22134653043"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario criado!"
+          },
+          "400": {
+            "description": "Algum campo não foi informado!"
+          }
+        }
+      }
+    },
+    "/users/update": {
+      "put": {
+        "tags": ["Usuario"],
+        "summary": "Edita um usuario existente",
+        "description": "Todas as informações podem ser alteradas com exeção do cpf",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "dt_nascimento": {
+                    "type": "Date"
+                  },
+                  "nome": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  },
+                  "cpf": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "email": "sample2@saplemail.com",
+                  "nome": "Jão da silva",
+                  "dt_nascimento": "1653908400",
+                  "senha": "minhaSenhaSuperSeguraESecreta",
+                  "cpf": "22134653043"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario atualizado!"
+          },
+          "400": {
+            "description": "Erro ao atualizar usuario!"
+          }
+        }
+      }
+    },
+    "/statement/{cpf}": {
+      "get": {
+        "tags": ["Extrato"],
+        "summary": "Consuta extrato por cpf",
+        "description": "Consuta extrato por cpf",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "params",
+            "required": true,
+            "description": "Cpf user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      },
+                      "cpf": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na operação"
+          }
+        }
+      }
+    },
+    "/statement/deposit": {
+      "post": {
+        "tags": ["Extrato"],
+        "summary": "Realiza deposito de milhas na conta por cpf",
+        "description": "Realiza deposito na conta por cpf",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "cpf": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "title": "Descartou corretamente 5 garrafas",
+                  "description": "Atitude Honrosa",
+                  "amount": 10.5,
+                  "cpf": "22134653043"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operacao realizada com sucesso!"
+          },
+          "400": {
+            "description": "cpf fornecido, não vinculado a nenhuma conta vinculada"
+          }
+        }
+      }
+    },
+    "/statement/withdraw": {
+      "post": {
+        "tags": ["Extrato"],
+        "summary": "Realiza Transferencia de milhas na conta por cpf",
+        "description": "Realiza Transferencia na conta por cpf",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "cpf": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "title": "Transferencia de milhas - SMILES",
+                  "description": "Uma nova viagem acontecerá em breve!",
+                  "amount": 510.5,
+                  "cpf": "22134653043"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operacao realizada com sucesso!"
+          },
+          "400": {
+            "description": "cpf fornecido, não vinculado a nenhuma conta vinculada"
+          }
+        }
+      }
+    },
+    "/stores": {
+      "get": {
+        "tags": ["Lojas"],
+        "summary": "Lista todas as lojas que aceitam as milhas como pagamento",
+        "description": "Lista todas as lojas",
+        "responses": {
+          "200": {
+            "description": "Operacao realizada com sucesso!"
+          },
+          "400": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/stores/updateStore": {
+      "post": {
+        "tags": ["Lojas"],
+        "summary": "Favorita uma loja por cpf",
+        "description": "Favorita uma loja por cpf",
+        "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "idLoja": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "idLoja": "1"
+                  }
+                }
+              }
+            }
+          },
+        "responses": {
+          "200": {
+            "description": "Operacao realizada com sucesso!"
+          },
+          "400": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    }
+  }
+}
