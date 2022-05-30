@@ -12,7 +12,6 @@ async function ListAllStores(req, res, next) {
 
 async function FavoriteStore(req, res) {
     const { idLoja } = req.body
-    const user = { email, dt_nascimento, nome, senha, cpf }
     try {
 
         let StoreExists = await findStoreByID(idLoja);
