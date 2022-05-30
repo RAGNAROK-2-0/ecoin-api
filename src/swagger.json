@@ -341,10 +341,14 @@
                   "properties": {
                     "idLoja": {
                       "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
                     }
                   },
                   "example": {
-                    "idLoja": "1"
+                    "idLoja": "1",
+                    "cpf":"22134653043"
                   }
                 }
               }
